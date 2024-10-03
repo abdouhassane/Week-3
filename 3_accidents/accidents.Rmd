@@ -1,0 +1,31 @@
+---
+title: "accidents"
+author: "AbdelRahman Hassane & Kazuma Oura"
+date: "2024-10-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+import data
+```{r}
+library(tidyverse)
+library(here)
+
+accident <- read_rds("data/accidents.rds")
+```
+
+make new dataframe
+```{r}
+accidentfilter <- accident %>% 
+  select(id, severity, day_of_week, time)
+ 
+acsf <- accidentfilter %>% 
+  mutate(wkd_wkday = day_of_week)
+
+acsf2 <- acsf %>%   
+filter(weekend == "Saturday" | weekend == "Sunday")
+```
+
